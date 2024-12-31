@@ -1,4 +1,6 @@
 
+TARGET_PLATFORM := android-21
+
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
@@ -27,12 +29,19 @@ LOCAL_SRC_FILES := nativ_FilterFunc.cpp \
 					HueSaturationFilter.cpp \
 					GothamFilter.cpp \
 
+LOCAL_ARM_MODE := arm
 
-LOCAL_CFLAGS := -Os -ffast-math -fPIC
+COMMON_CFLAGS := -Werror -DANDROID -DDISABLE_IMPORTGL
 
-LOCAL_LDLIBS := -llog
+ifeq ($(TARGET_ARCH),x86)
+	LOCAL_CFLAGS   := $(COMMON_CFLAGS)
+else
+	LOCAL_CFLAGS   := -fno-short-enums  -D_NDK_MATH_NO_SOFTFP=1 $(COMMON_CFLAGS)
+endif
 
-LOCAL_CPPFLAGS += -std=gnu++11
+LOCAL_LDLIBS :=  -llog -lEGL -lGLESv2 -ljnigraphics
+
+LOCAL_CPPFLAGS := -frtti -std=c++14
 
 include $(BUILD_SHARED_LIBRARY)
 
