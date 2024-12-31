@@ -1,11 +1,14 @@
-#
-APP_OPTIM := release
-APP_PLATFORM := android-19
-APP_STL := gnustl_static
-APP_CPPFLAGS += -frtti 
-APP_CPPFLAGS += -fexceptions
-APP_CPPFLAGS += -DANDROID
-APP_ABI := all
-APP_MODULES := ImageFilter
-NDK_TOOLCHAIN_VERSION := clang
 
+# APP_ABI := armeabi-v7a arm64-v8a x86 
+# armeabi & mips are deprecated
+APP_ABI :=  all
+
+APP_PLATFORM := android-21
+
+APP_STL := c++_static
+
+#APP_CPPFLAGS := -frtti -fexceptions
+#APP_CPPFLAGS := -fpermissive
+APP_CPPFLAGS := -frtti -std=c++14
+
+APP_OPTIM := release
