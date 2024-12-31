@@ -12,12 +12,13 @@ package net.alhazmy13.example;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import net.alhazmy13.imagefilter.ImageFilter;
 
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 int height = bitmap.getHeight();
                 return ImageFilter.applyFilter(bitmap, ImageFilter.Filter.LIGHT,width / 2, height / 2, Math.min(width / 2, height / 2));
             case 13:
-                double radius = (bitmap.getWidth() / 2) * 95 / 100;
+                double radius = (bitmap.getWidth() / 2f) * 95f / 100f;
                 return ImageFilter.applyFilter(bitmap, ImageFilter.Filter.LOMO,radius);
             case 14:
                 return ImageFilter.applyFilter(bitmap, ImageFilter.Filter.HDR);

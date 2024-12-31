@@ -1,39 +1,13 @@
 apply plugin: 'com.android.library'
-//./gradlew bintrayUpload
-ext {
-    bintrayRepo = 'maven'
-    bintrayName = 'ImageFilters'
-
-    publishedGroupId = 'net.alhazmy13.ImageFilters'
-    libraryName = 'library'
-
-    artifact = 'library'
-
-    libraryDescription = 'Image Filters'
-
-    siteUrl = 'https://github.com/alhzmy13/ImageFilters'
-    gitUrl = 'https://github.com/alhzmy13/ImageFilters.git'
-
-    libraryVersion = '0.1.2-beta'
-
-    developerId = 'alhazmy13'
-    developerName = 'Abdullah Alhazmy'
-    developerEmail = 'me@alhazmy13.net'
-
-    licenseName = 'The Apache Software License, Version 2.0'
-    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-    allLicenses = ["Apache-2.0"]
-}
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    compileSdk COMPILE_SDK_VERSION as int
+    buildToolsVersion = COMPILE_BUILD_TOOLS_VERSION as String
+    namespace 'net.alhazmy13.library'
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
-        ndk{
+        minSdk MIN_SDK_VERSION as int
+        targetSdk TARGET_SDK_VERSION as int
+        ndk {
             moduleName = "ImageFilter"
             ldLibs "log"
         }
@@ -44,12 +18,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    ndkVersion '28.0.12674087 rc2'
+
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.13.2'
 }
-apply from: './bintrayv1.gradle'
-apply from: './installv1.gradle'
